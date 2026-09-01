@@ -69,6 +69,41 @@ public class SSL {
         }
     }
 
+    void deleteAtHead(){
+        if(head==null){
+            System.out.println("LinkedList is empty");
+            return;
+        }
+        Node toDelete=head;
+        head=head.next;
+        System.out.println("Element deleted is "+ toDelete.data);
+        toDelete=null;   //garbage value
+    }
+
+    void deletebyValue(int val){
+        if(head==null){
+            System.out.println("linkedlist is empty");
+            return;
+        }
+        if(head.data==val){
+            Node to=head;
+            to=null;
+            return;
+        }
+        Node temp=head;
+        while(temp.next!=null && temp.next.data!=val){
+            temp=temp.next;
+        }
+        if(temp.next==null){
+            System.out.println("element not found");
+            return;
+        }
+        Node toDelete=temp.next;
+        temp.next=temp.next.next;
+        toDelete=null;
+
+    }
+
     void print() {
         Node temp = head;
 
@@ -113,6 +148,15 @@ class Driver {
         ssl.print();
 
         ssl.insertAtPos(67, 4);
+        ssl.print();
+
+        ssl.insertAtTail(100);
+        ssl.print();
+
+        ssl.deleteAtHead();
+        ssl.print();
+
+        ssl.deletebyValue(10);
         ssl.print();
     }
 }
