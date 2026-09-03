@@ -23,7 +23,7 @@ public class SLList {
         this.currentSize = 0;
     }
 
-    // Push
+
     void push(int val) {
 
         if (currentSize == maxSize) {
@@ -39,20 +39,21 @@ public class SLList {
         currentSize++;
     }
 
-    // Pop
+
     void pop() {
 
         if (top == null) {
             System.out.println("Underflow");
             return;
         }
-
+        Node todelete=top;
         top = top.next;
+        todelete=null;
 
         currentSize--;
     }
 
-    // Top
+
     void top() {
 
         if (top == null) {
@@ -63,19 +64,20 @@ public class SLList {
         System.out.println(top.Data);
     }
 
-    // Check whether stack is empty
+
     boolean isEmpty() {
 
         return top == null;
     }
 
-    // Get current size
+
     int getsize() {
 
         return currentSize;
     }
 
-    // Print stack
+
+
     void print() {
 
         Node temp = top;

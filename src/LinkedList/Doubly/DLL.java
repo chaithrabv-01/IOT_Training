@@ -21,7 +21,6 @@ public class DLL {
         this.head = null;
     }
 
-
     void InsertHead(int val) {
 
         Node n = new Node(val);
@@ -35,7 +34,6 @@ public class DLL {
         head.prev = n;
         head = n;
     }
-
 
     void InsertTail(int val) {
 
@@ -56,51 +54,45 @@ public class DLL {
         n.prev = temp;
     }
 
-
     void InsertAtPos(int val, int pos) {
 
         int size = getsize();
 
         if (pos < 0 || pos > size) {
-
             System.out.println("Invalid");
-
+            return;
         }
 
-
-        else if (pos == 0) {
+        if (pos == 0) {
 
             Node n = new Node(val);
 
             n.next = head;
-            if(head!=null) {
+
+            if (head != null) {
                 head.prev = n;
             }
 
             head = n;
+            return;
         }
 
+        Node n = new Node(val);
+        Node temp = head;
 
-        else {
-
-            Node n = new Node(val);
-            Node temp = head;
-
-            while (--pos > 0) {
-                temp = temp.next;
-            }
-
-            n.next = temp.next;
-            n.prev = temp;
-
-            if (temp.next != null) {
-                temp.next.prev = n;
-            }
-
-            temp.next = n;
+        while (--pos > 0) {
+            temp = temp.next;
         }
+
+        n.next = temp.next;
+        n.prev = temp;
+
+        if (temp.next != null) {
+            temp.next.prev = n;
+        }
+
+        temp.next = n;
     }
-
 
     int getsize() {
 
@@ -115,6 +107,59 @@ public class DLL {
         return size;
     }
 
+    void deleteAtHead() {
+
+        if (head == null) {
+            System.out.println("underflow");
+            return;
+        }
+
+        Node todelete = head;
+
+        head = head.next;
+
+        if (head != null) {
+            head.prev = null;
+        }
+
+        todelete = null;
+    }
+
+    void DeleteByValue(int val) {
+
+        if (head == null) {
+            System.out.println("empty");
+            return;
+        }
+
+        if (head.Data == val) {
+
+            head = head.next;
+
+            if (head != null) {
+                head.prev = null;
+            }
+
+            return;
+        }
+
+        Node temp = head;
+
+        while (temp != null && temp.Data != val) {
+            temp = temp.next;
+        }
+
+        if (temp == null) {
+            System.out.println("value not found");
+            return;
+        }
+
+        temp.prev.next = temp.next;
+
+        if (temp.next != null) {
+            temp.next.prev = temp.prev;
+        }
+    }
 
     void print() {
 
@@ -155,5 +200,16 @@ class Driver {
 
         d.print();
 
+        d.DeleteByValue(50);
+
+        d.print();
+
+        d.DeleteByValue(5);
+
+        d.print();
+
+        d.DeleteByValue(100);
+
+        d.print();
     }
 }
